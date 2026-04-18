@@ -365,13 +365,13 @@ export default function App() {
               <div className="bg-white rounded-2xl p-5 border border-[#e2e8f0] shadow-sm">
                 <div className="flex items-center gap-2 mb-5 text-[#64748b]">
                   <SettingsIcon size={14} />
-                  <h2 className="font-bold text-[11px] uppercase tracking-[0.1em]">Hệ Thống</h2>
+                  <h2 className="font-bold text-xs uppercase tracking-[0.1em]">Hệ Thống</h2>
                 </div>
                 
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Loại Nhựa</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Loại Nhựa</label>
                       <select 
                         value={quoteCategory}
                         onChange={(e) => {
@@ -383,7 +383,7 @@ export default function App() {
                             setParams(p => ({ ...p, materialId: firstOfCat.id }));
                           }
                         }}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       >
                         {['PLA', 'PETG', 'PETG-CF', 'ABS', 'ASA', 'TPU'].map(cat => (
                           <option key={cat} value={cat}>{cat}</option>
@@ -391,11 +391,11 @@ export default function App() {
                       </select>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Nhựa Trong Kho</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Nhựa Trong Kho</label>
                       <select 
                         value={params.materialId}
                         onChange={(e) => setParams({ ...params, materialId: e.target.value })}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       >
                         {materials
                           .filter(m => (m.category || 'PLA') === quoteCategory)
@@ -413,13 +413,13 @@ export default function App() {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Giá Nhựa/KG</label>
-                      <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-bold text-[#2563eb]">
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Giá Nhựa/KG</label>
+                      <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-bold text-[#2563eb]">
                         {formatCurrency(selectedMaterial?.pricePerKg || 0)}
                       </div>
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Máy (W)</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Máy (W)</label>
                       <input 
                         type="number"
                         value={systemSettings.machinePowerW}
@@ -428,11 +428,11 @@ export default function App() {
                           setSystemSettings(s => ({ ...s, machinePowerW: val }));
                           saveSettings({ ...systemSettings, machinePowerW: val });
                         }}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Điện/KWH</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Điện/KWH</label>
                       <input 
                         type="number"
                         value={systemSettings.electricityPriceKwh}
@@ -441,11 +441,11 @@ export default function App() {
                           setSystemSettings(s => ({ ...s, electricityPriceKwh: val }));
                           saveSettings({ ...systemSettings, electricityPriceKwh: val });
                         }}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Khấu Hao/H</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Khấu Hao/H</label>
                       <input 
                         type="number"
                         value={systemSettings.depreciationPerHour}
@@ -454,7 +454,7 @@ export default function App() {
                           setSystemSettings(s => ({ ...s, depreciationPerHour: val }));
                           saveSettings({ ...systemSettings, depreciationPerHour: val });
                         }}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       />
                     </div>
                   </div>
@@ -465,66 +465,66 @@ export default function App() {
               <div className="bg-white rounded-2xl p-5 border border-[#e2e8f0] shadow-sm">
                 <div className="flex items-center gap-2 mb-5 text-[#64748b]">
                   <Box size={14} />
-                  <h2 className="font-bold text-[11px] uppercase tracking-[0.1em]">Thông Số Bản In</h2>
+                  <h2 className="font-bold text-xs uppercase tracking-[0.1em]">Thông Số Bản In</h2>
                 </div>
 
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-3">
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Giờ In</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Giờ In</label>
                       <input 
                         type="number"
                         value={params.hours}
                         onChange={(e) => setParams({ ...params, hours: Number(e.target.value) })}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Phút</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Phút</label>
                       <input 
                         type="number"
                         value={params.minutes}
                         onChange={(e) => setParams({ ...params, minutes: Number(e.target.value) })}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Cân Nặng (G)</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Cân Nặng (G)</label>
                       <input 
                         type="number"
                         value={params.weightG}
                         onChange={(e) => setParams({ ...params, weightG: Number(e.target.value) })}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[11px] font-bold text-[#1e293b] px-1">Infill (%)</label>
+                      <label className="text-xs font-bold text-[#1e293b] px-1">Infill (%)</label>
                       <input 
                         type="number"
                         value={params.infillPercent}
                         onChange={(e) => setParams({ ...params, infillPercent: Number(e.target.value) })}
-                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                        className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold text-[#1e293b] px-1">Phụ Phí Xử Lý (VND)</label>
+                    <label className="text-xs font-bold text-[#1e293b] px-1">Phụ Phí Xử Lý (VND)</label>
                     <input 
                       type="number"
                       value={params.extraFee}
                       onChange={(e) => setParams({ ...params, extraFee: Number(e.target.value) })}
-                      className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-bold text-[#2563eb] focus:ring-1 focus:ring-[#2563eb] outline-none"
+                      className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-bold text-[#2563eb] focus:ring-1 focus:ring-[#2563eb] outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold text-[#1e293b] px-1">Nội Dung</label>
+                    <label className="text-xs font-bold text-[#1e293b] px-1">Nội Dung</label>
                     <input 
                       type="text"
                       value={params.note}
                       onChange={(e) => setParams({ ...params, note: e.target.value })}
-                      className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-xs font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
+                      className="w-full bg-[#fdfdfd] border border-[#e2e8f0] rounded-xl px-4 py-2.5 text-sm font-semibold focus:ring-1 focus:ring-[#2563eb] outline-none"
                     />
                   </div>
                 </div>
@@ -532,13 +532,13 @@ export default function App() {
 
               {/* Internal Cost Summary */}
               <div className="bg-[#f1f5f9] rounded-2xl p-5 border border-[#e2e8f0] mt-auto">
-                 <div className="flex justify-between items-center text-[10px] font-bold text-[#64748b] uppercase tracking-widest mb-2">
+                 <div className="flex justify-between items-center text-xs font-bold text-[#64748b] uppercase tracking-widest mb-2">
                    <span>Giá vốn nội bộ</span>
                    <span className="text-[#1e293b]">{results.internalTotal.toLocaleString()} đ</span>
                  </div>
                  <div className="flex justify-between items-center">
-                    <span className="text-[11px] font-extrabold uppercase text-[#2563eb]">Tổng báo giá</span>
-                    <span className="text-xl font-extrabold text-[#2563eb]">{results.customerTotal.toLocaleString()} đ</span>
+                    <span className="text-sm font-extrabold uppercase text-[#2563eb]">Tổng báo giá</span>
+                    <span className="text-2xl font-extrabold text-[#2563eb]">{results.customerTotal.toLocaleString()} đ</span>
                  </div>
               </div>
             </div>
@@ -548,8 +548,8 @@ export default function App() {
               <main ref={quoteRef} className="bg-white rounded-2xl shadow-sm border border-[#e2e8f0] flex flex-col min-h-full">
                 <div className="p-8 border-b border-[#e2e8f0] flex justify-between items-center bg-[#fdfdfd]">
                   <div>
-                    <p className="text-[9px] font-black text-[#64748b] uppercase tracking-[0.3em] mb-1">NSHOP DIGITAL FABRICATION</p>
-                    <h1 className="text-lg font-extrabold tracking-tight">Xác Nhận Báo Giá</h1>
+                    <p className="text-[10px] font-black text-[#64748b] uppercase tracking-[0.3em] mb-1">NSHOP DIGITAL FABRICATION</p>
+                    <h1 className="text-xl font-extrabold tracking-tight">Xác Nhận Báo Giá</h1>
                   </div>
                   <button 
                     onClick={handleExportImage}
@@ -569,26 +569,26 @@ export default function App() {
                     <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-2xl p-5">
                       <div className="flex items-center gap-2 mb-4 text-[#2563eb]">
                         <Info size={14} />
-                        <h3 className="text-[10px] font-extrabold uppercase tracking-widest">Thông Số Preview</h3>
+                        <h3 className="text-[11px] font-extrabold uppercase tracking-widest">Thông Số Preview</h3>
                       </div>
-                      <div className="grid grid-cols-2 gap-4 text-xs">
+                      <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <p className="text-[9px] font-bold text-[#64748b] uppercase mb-0.5">Vật liệu</p>
+                          <p className="text-[10px] font-bold text-[#64748b] uppercase mb-0.5">Vật liệu</p>
                           <p className="font-bold">{selectedMaterial?.category || '---'} {selectedMaterial?.brand}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-[9px] font-bold text-[#64748b] uppercase mb-0.5">Khối lượng</p>
+                          <p className="text-[10px] font-bold text-[#64748b] uppercase mb-0.5">Khối lượng</p>
                           <p className="font-bold text-[#22c55e]">{params.weightG}G</p>
                         </div>
                         <div>
-                          <p className="text-[9px] font-bold text-[#64748b] uppercase mb-0.5">Màu sắc</p>
+                          <p className="text-[10px] font-bold text-[#64748b] uppercase mb-0.5">Màu sắc</p>
                           <div className="flex items-center gap-2">
                              <div className="w-4 h-4 rounded-full border border-black/5" style={{ backgroundColor: selectedMaterial?.colorHex }} />
                              <span className="font-bold">{selectedMaterial?.color || '---'}</span>
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-[9px] font-bold text-[#64748b] uppercase mb-0.5">Thời gian in</p>
+                          <p className="text-[10px] font-bold text-[#64748b] uppercase mb-0.5">Thời gian in</p>
                           <p className="font-bold">{params.hours}h {params.minutes}m</p>
                         </div>
                       </div>
@@ -597,15 +597,15 @@ export default function App() {
                     <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-2xl p-5">
                       <div className="flex items-center gap-2 mb-4 text-[#2563eb]">
                         <Coins size={14} />
-                        <h3 className="text-[10px] font-extrabold uppercase tracking-widest">Thanh Toán</h3>
+                        <h3 className="text-xs font-extrabold uppercase tracking-widest">Thanh Toán</h3>
                       </div>
                       <div className="space-y-1.5 flex flex-col h-full">
-                         <div className="text-[28px] font-black tracking-tighter text-[#1e293b]">
-                           {results.customerTotal.toLocaleString()} <span className="text-sm font-bold text-[#64748b]">VND</span>
+                         <div className="text-[32px] font-black tracking-tighter text-[#1e293b]">
+                           {results.customerTotal.toLocaleString()} <span className="text-base font-bold text-[#64748b]">VND</span>
                          </div>
                          <button 
                            onClick={handleExportPDF}
-                           className="w-full py-2 bg-[#22c55e] text-white text-[11px] font-bold rounded-xl mt-auto shadow-md hover:bg-emerald-600 transition-colors"
+                           className="w-full py-2.5 bg-[#22c55e] text-white text-xs font-bold rounded-xl mt-auto shadow-md hover:bg-emerald-600 transition-colors"
                          >
                            Xuất Báo Giá PDF
                          </button>
@@ -617,11 +617,11 @@ export default function App() {
                   <div className="bg-[#f5f3ff] border border-[#ddd6fe] rounded-3xl p-6 shadow-sm">
                     <div className="flex items-center gap-2 mb-2 text-[#6d28d9]">
                       <Sparkles size={16} />
-                      <h3 className="text-[11px] font-black uppercase tracking-widest">
+                      <h3 className="text-xs font-black uppercase tracking-widest">
                         Đặc tính nhựa {quoteCategory}
                       </h3>
                     </div>
-                    <p className="text-[11px] font-bold text-[#4c1d95] italic leading-relaxed">
+                    <p className="text-xs font-bold text-[#4c1d95] italic leading-relaxed">
                       {MATERIAL_CHARACTERISTICS[quoteCategory] || 'Chọn loại nhựa để xem đặc tính.'}
                     </p>
                   </div>
@@ -629,7 +629,7 @@ export default function App() {
                   {/* Notes Card */}
                   <div className="bg-[#f1f5f9] border border-[#e2e8f0] rounded-2xl p-6 relative group/notes">
                     <div className="flex justify-between items-center mb-3">
-                      <h3 className="text-[10px] font-extrabold text-[#64748b] uppercase tracking-widest flex items-center gap-2">
+                      <h3 className="text-xs font-extrabold text-[#64748b] uppercase tracking-widest flex items-center gap-2">
                         <Info size={14} className="text-[#2563eb]" /> Lưu ý dịch vụ in 3D
                       </h3>
                       {user && (
@@ -661,7 +661,7 @@ export default function App() {
                         </button>
                       </div>
                     ) : (
-                      <div className="whitespace-pre-line text-[10px] text-[#64748b] font-bold leading-[1.6]">
+                      <div className="whitespace-pre-line text-xs text-[#64748b] font-bold leading-[1.6]">
                         {systemSettings.serviceNotes || DEFAULT_SERVICE_NOTES}
                       </div>
                     )}
@@ -679,13 +679,13 @@ export default function App() {
                      </div>
                      <div className="space-y-4">
                         <div>
-                          <p className="text-[10px] font-bold text-[#64748b] uppercase tracking-wider">Thông tin chuyển khoản</p>
-                          <p className="text-sm font-extrabold uppercase tracking-tight text-[#2563eb]">CTK: VO THANH NAM • NGÂN HÀNG OCB</p>
-                          <p className="text-[10px] font-bold text-[#64748b] mt-0.5">STK: 0344970774</p>
+                          <p className="text-xs font-bold text-[#64748b] uppercase tracking-wider">Thông tin chuyển khoản</p>
+                          <p className="text-base font-extrabold uppercase tracking-tight text-[#2563eb]">CTK: VO THANH NAM • NGÂN HÀNG OCB</p>
+                          <p className="text-xs font-bold text-[#64748b] mt-0.5">STK: 0344970774</p>
                         </div>
                         <div>
-                          <p className="text-[10px] font-bold text-[#64748b] uppercase tracking-wider">Nội dung</p>
-                          <p className="text-xl font-black tracking-tighter uppercase">{params.note}</p>
+                          <p className="text-xs font-bold text-[#64748b] uppercase tracking-wider">Nội dung</p>
+                          <p className="text-2xl font-black tracking-tighter uppercase">{params.note}</p>
                         </div>
                      </div>
                   </div>
@@ -698,7 +698,7 @@ export default function App() {
               <div className="bg-white rounded-2xl p-5 border border-[#e2e8f0] shadow-sm flex flex-col h-full">
                 <div className="flex items-center gap-2 mb-4 text-[#64748b]">
                   <Box size={14} />
-                  <h2 className="font-bold text-[11px] uppercase tracking-[0.1em]">Kho Nhựa Tham Khảo</h2>
+                  <h2 className="font-bold text-xs uppercase tracking-[0.1em]">Kho Nhựa Tham Khảo</h2>
                 </div>
                 
                 <div className="space-y-3 flex-1 overflow-y-auto no-scrollbar pb-4">
@@ -713,12 +713,12 @@ export default function App() {
                           )}
                         </div>
                         <div className="flex-1">
-                          <p className="text-xs font-bold leading-none mb-1">{m.category} {m.brand}</p>
+                          <p className="text-sm font-bold leading-none mb-1">{m.category} {m.brand}</p>
                           <div className="flex items-center gap-1.5 opacity-60">
                              <div className="w-2 h-2 rounded-full border border-black/5" style={{ backgroundColor: m.colorHex }} />
-                             <p className="text-[9px] font-bold truncate max-w-[80px]">{m.color || '---'}</p>
+                             <p className="text-xs font-bold truncate max-w-[80px]">{m.color || '---'}</p>
                           </div>
-                          <p className="text-[10px] font-bold text-[#2563eb] mt-1">{formatCurrency(m.pricePerKg)}</p>
+                          <p className="text-xs font-bold text-[#2563eb] mt-1">{formatCurrency(m.pricePerKg)}</p>
                         </div>
                         <div className="w-3 h-3 rounded-full border border-black/5" style={{ backgroundColor: m.colorHex }} />
                       </div>
@@ -728,8 +728,8 @@ export default function App() {
 
                 <div className="pt-4 border-t border-[#e2e8f0] mt-auto">
                    <div className="bg-[#2563eb] rounded-xl p-3 text-white">
-                      <p className="text-[9px] font-bold uppercase opacity-80 mb-1">Tổng tồn kho</p>
-                      <p className="text-lg font-black tracking-tight">{materials.length} Loại</p>
+                      <p className="text-xs font-bold uppercase opacity-80 mb-1">Tổng tồn kho</p>
+                      <p className="text-xl font-black tracking-tight">{materials.length} Loại</p>
                    </div>
                 </div>
               </div>
