@@ -1,0 +1,8 @@
+{
+  "name": "Báo Giá In 3D",
+  "description": "Ứng dụng tính toán báo giá dịch vụ in 3D và quản lý kho nhựa.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": []
+}

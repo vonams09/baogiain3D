@@ -1,0 +1,87 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Phase 3: Primitive Definition
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Material Validation Helper
+    function isValidMaterial(data) {
+      return data.keys().hasAll(['name', 'pricePerKg', 'ownerId']) 
+          && data.name is string && data.name.size() <= 200
+          && data.get('brand', 'Unknown') is string && data.get('brand', '').size() <= 100
+          && data.pricePerKg is number && data.pricePerKg >= 0
+          && data.get('color', 'Trắng') is string && data.get('color', '').size() <= 50
+          && data.get('colorHex', '#ffffff') is string && data.get('colorHex', '#ffffff').matches('^#[0-9a-fA-F]{6}$')
+          && data.ownerId == request.auth.uid
+          && data.get('category', 'PLA') in ['PLA', 'PETG', 'PETG-CF', 'ABS', 'ASA', 'TPU', 'Unknown']
+          && data.get('inStock', true) is bool
+          && (data.get('imageUrl', null) == null || (data.imageUrl is string && data.imageUrl.size() <= 500000));
+    }
+
+    // Settings Validation Helper
+    function isValidSettings(data) {
+      return data.keys().hasAll(['machinePowerW', 'electricityPriceKwh', 'depreciationPerHour', 'ownerId'])
+          && data.machinePowerW is number && data.machinePowerW >= 0
+          && data.electricityPriceKwh is number && data.electricityPriceKwh >= 0
+          && data.depreciationPerHour is number && data.depreciationPerHour >= 0
+          && data.ownerId == request.auth.uid;
+    }
+
+    // Materials Collection
+    match /materials/{materialId} {
+      allow get: if isOwner(existing().ownerId);
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      
+      allow create: if isSignedIn() 
+                    && isValidId(materialId) 
+                    && isValidMaterial(incoming())
+                    && incoming().createdAt == request.time
+                    && incoming().updatedAt == request.time;
+      
+      allow update: if isSignedIn() 
+                    && isValidMaterial(incoming())
+                    && incoming().ownerId == existing().ownerId
+                    && incoming().createdAt == existing().createdAt
+                    && incoming().updatedAt == request.time
+                    && (
+                      // Allow updating all fields except immutable ones
+                      incoming().diff(existing()).affectedKeys().hasOnly(['name', 'brand', 'pricePerKg', 'color', 'colorHex', 'category', 'inStock', 'imageUrl', 'updatedAt'])
+                    );
+      
+      allow delete: if isOwner(existing().ownerId);
+    }
+
+    // Settings Collection
+    match /settings/{userId} {
+      allow get: if isOwner(userId);
+      allow create: if isOwner(userId) && isValidSettings(incoming());
+      allow update: if isOwner(userId) 
+                    && isValidSettings(incoming())
+                    && incoming().diff(existing()).affectedKeys().hasOnly(['machinePowerW', 'electricityPriceKwh', 'depreciationPerHour']);
+    }
+  }
+}

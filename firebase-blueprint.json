@@ -1,0 +1,46 @@
+{
+  "entities": {
+    "Material": {
+      "title": "Material",
+      "description": "3D Printing Filament material information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "pricePerKg": { "type": "number" },
+        "color": { "type": "string" },
+        "colorHex": { "type": "string" },
+        "category": { "type": "string" },
+        "inStock": { "type": "boolean" },
+        "imageUrl": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "pricePerKg", "ownerId"]
+    },
+    "Settings": {
+      "title": "System Settings",
+      "description": "User specific calculation settings",
+      "type": "object",
+      "properties": {
+        "machinePowerW": { "type": "number" },
+        "electricityPriceKwh": { "type": "number" },
+        "depreciationPerHour": { "type": "number" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["machinePowerW", "electricityPriceKwh", "depreciationPerHour", "ownerId"]
+    }
+  },
+  "firestore": {
+    "/materials/{materialId}": {
+      "schema": "Material",
+      "description": "Inventory of materials"
+    },
+    "/settings/{userId}": {
+      "schema": "Settings",
+      "description": "User calculation settings"
+    }
+  }
+}
